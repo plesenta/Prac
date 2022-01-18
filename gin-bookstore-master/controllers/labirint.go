@@ -95,7 +95,13 @@ func Movement(c *gin.Context) {
 
 		c.IndentedJSON(http.StatusOK, pos)
 
+	} else if input.Command == "/init" {
+
+		x = 0
+		y = 0
+
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "400"})
 	}
+
 }
