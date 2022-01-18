@@ -2,53 +2,56 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/rahmanfadhil/gin-bookstore/models"
 	"net/http"
 )
 
-var Pattern = [20][20]int{{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2},
+var Pattern = [20][20]int{{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}
 
-var x = 9
+var x = 0
 var y = 0
-var Position = Pattern[x][y]
-var Win = Pattern[19][15]
 
 type Cmd struct {
 	Command string `json:"command"`
 }
+type Coordinates struct {
+	Top   int `json:"top"`
+	Bot   int `json:"bot"`
+	Left  int `json:"left"`
+	Right int `json:"right"`
+}
 
-//POST/labirint
 func Movement(c *gin.Context) {
 	var input Cmd
-	var pos models.Coordinates
-
-	//if err := c.ShouldBindJSON(&input); err != nil {
-	//	c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-	//	return
-	//}
+	//var pos Coordinates
+	pos := Coordinates{0, 0, 0, 0}
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
 	if input.Command == "/move_top" {
 		if Pattern[x][y-1] == 1 {
-			Position = Pattern[x][y-1]
+			y -= 1
+			pos.Top += 1
 			c.JSON(http.StatusOK, gin.H{"message": "Команда успешно выполнена!"})
 		} else if Pattern[x][y-1] <= 0 {
 			c.JSON(http.StatusNotFound, gin.H{"message": "Прохода нет!"})
@@ -56,39 +59,39 @@ func Movement(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{"message": "Вы нашли выход!"})
 		}
 
-	}
-	if input.Command == "/move_bot" {
+	} else if input.Command == "/move_bot" {
 		if Pattern[x][y+1] == 1 {
-			Position = Pattern[x][y+1]
+			y += 1
+			pos.Bot -= 1
 			c.JSON(http.StatusOK, gin.H{"message": "Команда успешно выполнена!"})
 		} else if Pattern[x][y+1] <= 0 {
 			c.JSON(http.StatusNotFound, gin.H{"message": "Прохода нет!"})
 		} else if Pattern[x][y+1] == 2 {
 			c.JSON(http.StatusOK, gin.H{"message": "Вы нашли выход!"})
 		}
-	}
-	if input.Command == "/move_left" {
-		if Pattern[x+1][y] == 1 {
-			Position = Pattern[x+1][y]
+	} else if input.Command == "/move_left" {
+		if Pattern[x-1][y] == 1 {
+			x -= 1
+			pos.Left -= 1
 			c.JSON(http.StatusOK, gin.H{"message": "Команда успешно выполнена!"})
 		} else if Pattern[x+1][y] <= 0 {
 			c.JSON(http.StatusNotFound, gin.H{"message": "Прохода нет!"})
 		} else if Pattern[x+1][y] == 2 {
 			c.JSON(http.StatusOK, gin.H{"message": "Вы нашли выход!"})
 		}
-	}
-	if input.Command == "/move_right" {
-		if Pattern[x-1][y] == 1 {
-			Position = Pattern[x-1][y]
+	} else if input.Command == "/move_right" {
+		if Pattern[x+1][y] == 1 {
+			x += 1
+			pos.Right += 1
 			c.JSON(http.StatusOK, gin.H{"message": "Команда успешно выполнена!"})
 		} else if Pattern[x-1][y] <= 0 {
 			c.JSON(http.StatusNotFound, gin.H{"message": "Прохода нет!"})
 		} else if Pattern[x-1][y] == 2 {
 			c.JSON(http.StatusOK, gin.H{"message": "Вы нашли выход!"})
 		}
-	}
-	if input.Command == "/check" {
+	} else if input.Command == "/check" {
 		c.IndentedJSON(http.StatusOK, pos)
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "400"})
 	}
 }
-
