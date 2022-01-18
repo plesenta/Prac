@@ -88,26 +88,10 @@ func Movement(c *gin.Context) {
 		}
 	} else if input.Command == "/check" {
 
-		if Pattern[x][y-1] == 1 {
-			pos.Top = 1
-		} else {
-			pos.Top = 0
-		}
-		if Pattern[x][y+1] == 1 {
-			pos.Bot = 1
-		} else {
-			pos.Bot = 0
-		}
-		if Pattern[x+1][y] == 1 {
-			pos.Right = 1
-		} else {
-			pos.Right = 0
-		}
-		if Pattern[x-1][y] == 1 {
-			pos.Left = 1
-		} else {
-			pos.Left = 0
-		}
+		pos.Top = Pattern[x][y-1]
+		pos.Bot = Pattern[x][y+1]
+		pos.Left = Pattern[x-1][y]
+		pos.Right = Pattern[x+1][y]
 
 		c.IndentedJSON(http.StatusOK, pos)
 
